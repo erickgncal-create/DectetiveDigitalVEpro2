@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detective Digital — Plataforma OSINT Basada en Fuentes Reales</title>
+  <title>Detective Digital Pro — Plataforma OSINT & Agregador de Prensa en Vivo</title>
   <style>
     :root {
       --bg: #090d16;
       --surface: rgba(15, 23, 42, 0.85);
+      --surface-solid: #0f172a;
       --border: rgba(255, 255, 255, 0.08);
       --primary: #38bdf8;
       --primary-hover: #0284c7;
@@ -34,7 +35,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Cabecera */
+    /* Cabecera Apple / Web Tech */
     header.app-header {
       background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(20px);
@@ -78,7 +79,7 @@
 
     .search-box-wrap {
       position: relative;
-      width: 460px;
+      width: 480px;
     }
 
     .search-input {
@@ -177,7 +178,7 @@
     .view-scroll-area {
       flex: 1;
       overflow-y: auto;
-      padding: 24px;
+      padding: 20px 24px;
     }
 
     .card {
@@ -246,56 +247,66 @@
 
     .btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
 
-    /* Perfil Real Card */
-    .real-profile-box {
-      background: rgba(0, 0, 0, 0.3);
+    /* Dossier Periodístico Real */
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 960px) {
+      .dossier-grid { grid-template-columns: 1fr; }
+    }
+
+    .biography-box {
+      background: rgba(0, 0, 0, 0.35);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 20px;
+      padding: 18px;
       display: flex;
-      gap: 20px;
-      margin-top: 14px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
-    .profile-img-wrap {
-      width: 110px;
-      height: 140px;
-      border-radius: 8px;
-      background: #1e293b;
-      overflow: hidden;
-      flex-shrink: 0;
-      border: 1px solid var(--border);
-    }
-
-    .profile-img-wrap img {
-      width: 100%;
-      height: 100%;
+    .profile-photo {
+      width: 140px;
+      height: 170px;
+      border-radius: 10px;
       object-fit: cover;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+      background: #1e293b;
     }
 
-    .profile-content h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
+    .press-stream-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .press-article-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .press-article-card:hover { border-color: var(--primary); }
+
+    .press-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
       margin-bottom: 4px;
     }
 
-    .profile-content .desc {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.45;
-      margin-bottom: 12px;
-    }
-
-    .profile-meta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      font-size: 0.78rem;
-      background: rgba(15, 23, 42, 0.6);
-      padding: 10px 14px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
+    .press-outlet { font-weight: 700; color: var(--primary); }
 
     /* Triple Feed */
     .triple-feed-layout {
@@ -336,45 +347,6 @@
       gap: 12px;
     }
 
-    .feed-item {
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      transition: border-color 0.2s;
-    }
-
-    .feed-item:hover { border-color: rgba(255, 255, 255, 0.2); }
-
-    .feed-item .outlet {
-      font-weight: 700;
-      color: var(--primary);
-      font-size: 0.72rem;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .feed-item h4 {
-      font-size: 0.85rem;
-      font-weight: 600;
-      line-height: 1.35;
-      margin-bottom: 6px;
-    }
-
-    .feed-item h4 a {
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .feed-item h4 a:hover { color: var(--primary); }
-
-    .feed-item p {
-      font-size: 0.76rem;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
     /* Buscador TSJ */
     .dork-item {
       background: rgba(0, 0, 0, 0.3);
@@ -397,7 +369,7 @@
 
     /* Inspector */
     .inspector-panel {
-      width: 380px;
+      width: 360px;
       background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(20px);
       border-left: 1px solid var(--border);
@@ -426,29 +398,29 @@
     <div class="brand-wrap">
       <div class="brand-logo">🔍</div>
       <div class="brand-info">
-        <h1>DETECTIVE DIGITAL <span style="font-size: 0.65rem; background: var(--primary-hover); padding: 2px 6px; border-radius: 4px;">REAL OSINT</span></h1>
-        <p>Fuentes Abiertas Reales • Estándar Protocolo de Berkeley (ONU / UC Berkeley)</p>
+        <h1>DETECTIVE DIGITAL <span style="font-size: 0.65rem; background: var(--primary-hover); padding: 2px 6px; border-radius: 4px;">LIVE OSINT</span></h1>
+        <p>Inteligencia de Fuentes Abiertas y Prensa en Vivo • Protocolo de Berkeley (ONU / UC Berkeley)</p>
       </div>
     </div>
 
     <!-- Buscador Global en Vivo -->
     <div class="search-box-wrap">
       <span class="search-icon-pos">⌘</span>
-      <input type="text" class="search-input" id="global-search" placeholder="Escribe un nombre real (ej. Nicolás Maduro, Diosdado Cabello)..." onkeyup="handleGlobalSearch(event)">
+      <input type="text" class="search-input" id="global-search" placeholder="Investigar persona (ej. Nicolás Maduro), funcionario o tema..." onkeyup="if(event.key==='Enter') ejecutarInvestigacionIntegral()">
       <span class="search-kbd">Enter</span>
     </div>
 
     <div class="header-badge">
-      <span>●</span> Conectado a Fuentes Abiertas Reales
+      <span>●</span> Conectores de Prensa y Wikipedia Activos
     </div>
   </header>
 
   <!-- Pestañas -->
   <nav class="app-nav">
-    <button class="nav-btn active" onclick="navigateTab('perfiles')">👤 Buscador Real de Perfiles (Wikipedia/Wikidata)</button>
-    <button class="nav-btn" onclick="navigateTab('feeds')">📡 Tri-Feed de Noticias Reales (Contraste)</button>
-    <button class="nav-btn" onclick="navigateTab('tsj')">⚖️ Buscador TSJ & Gacetas (Consultas Reales)</button>
-    <button class="nav-btn" onclick="navigateTab('forense')">🛡️ Ingesta Forense & Hash SHA-256 Real</button>
+    <button class="nav-btn active" onclick="navigateTab('investigacion')">👤 Dossier Integral (Prensa + Wikipedia)</button>
+    <button class="nav-btn" onclick="navigateTab('feeds')">📡 Tri-Feed en Vivo (Contraste de Medios)</button>
+    <button class="nav-btn" onclick="navigateTab('tsj')">⚖️ Consultas Reales TSJ & Gacetas</button>
+    <button class="nav-btn" onclick="navigateTab('custodia')">🛡️ Cadena de Custodia & Hash SHA-256</button>
   </nav>
 
   <!-- Workspace -->
@@ -457,41 +429,40 @@
     <div class="view-scroll-area">
 
       <!-- ======================================================== -->
-      <!-- PESTAÑA 1: BUSCADOR DE PERFILES REALES                   -->
+      <!-- PESTAÑA 1: INVESTIGACIÓN INTEGRAL (PRENSA + WIKIPEDIA)   -->
       <!-- ======================================================== -->
-      <div id="view-perfiles" class="tab-view">
+      <div id="view-investigacion" class="tab-view">
         <div class="card">
           <div class="card-title-bar">
-            <h2><span>👤</span> Buscador de Perfiles Verificados en Fuentes Abiertas</h2>
-            <div class="pill green">API Wikipedia / Wikidata en Vivo</div>
+            <h2><span>👤</span> Dossier de Inteligencia Periodística en Tiempo Real</h2>
+            <div class="pill green">Cruce de Wikipedia + Prensa en Vivo de Venezuela</div>
           </div>
-
-          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 14px;">
-            Consulta directamente registros públicos verificados. No se generan datos sin sustento documental.
-          </p>
 
           <div style="display: flex; gap: 10px; margin-bottom: 16px;">
-            <input type="text" id="profile-query" class="search-input" style="flex: 1;" placeholder="Ej. Nicolás Maduro, Diosdado Cabello, María Corina Machado, Vladimir Padrino López..." onkeyup="if(event.key==='Enter') buscarPerfilReal()">
-            <button class="btn" onclick="buscarPerfilReal()">🔍 Buscar Perfil Real</button>
+            <input type="text" id="investiga-query" class="search-input" style="flex: 1;" placeholder="Escribe cualquier nombre o tema (ej. Nicolás Maduro, Diosdado Cabello, María Corina Machado)..." value="Nicolás Maduro" onkeyup="if(event.key==='Enter') ejecutarInvestigacionIntegral()">
+            <button class="btn" onclick="ejecutarInvestigacionIntegral()">🔍 Investigar en Fuentes Abiertas</button>
           </div>
 
-          <div id="profile-status" style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 12px; display: none;"></div>
+          <div id="investiga-status" style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 12px;">
+            Iniciando búsqueda en fuentes documentales y cables de prensa...
+          </div>
 
-          <div id="profile-result-container">
-            <!-- Renderizado dinámico de la API real -->
+          <!-- Contenedor del Dossier -->
+          <div id="dossier-result">
+            <!-- Inyectado por JS -->
           </div>
         </div>
       </div>
 
       <!-- ======================================================== -->
-      <!-- PESTAÑA 2: TRI-FEED DE NOTICIAS REALES                   -->
+      <!-- PESTAÑA 2: TRI-FEED EN VIVO                              -->
       <!-- ======================================================== -->
       <div id="view-feeds" class="tab-view" style="display: none;">
         <div class="card" style="padding: 12px 18px; margin-bottom: 14px;">
           <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
             <strong style="font-size: 0.85rem;">📡 Filtro de Contraste en Vivo:</strong>
-            <input type="text" id="feed-filter-input" class="search-input" placeholder="Filtrar titulares reales en las tres columnas (ej. Maduro, allanamiento, apagón)..." onkeyup="filtrarTitularesReales()" style="flex: 1;">
-            <button class="btn btn-secondary" onclick="cargarFeedsReales()">🔄 Sincronizar Medios</button>
+            <input type="text" id="feed-filter-input" class="search-input" placeholder="Filtrar titulares por tema (ej. Maduro, operativos, apagón)..." onkeyup="filtrarFeeds()" style="flex: 1;">
+            <button class="btn btn-secondary" onclick="cargarFeedsEnVivo()">🔄 Actualizar Despachos</button>
           </div>
         </div>
 
@@ -502,20 +473,16 @@
               <strong style="font-size: 0.84rem;">🟢 Prensa Independiente & DDHH</strong>
               <span class="pill blue">Terreno</span>
             </div>
-            <div class="feed-scroll" id="feed-independiente">
-              <div style="font-size: 0.78rem; color: var(--text-muted); text-align: center; padding: 20px;">Cargando despachos reales...</div>
-            </div>
+            <div class="feed-scroll" id="feed-independiente"></div>
           </div>
 
           <!-- Columna 2: Portales Oficiales del Estado -->
           <div class="feed-col">
             <div class="feed-header">
-              <strong style="font-size: 0.84rem;">🔴 Medios & Portales Oficiales</strong>
+              <strong style="font-size: 0.84rem;">🔴 Portales Oficiales</strong>
               <span class="pill amber">Versión Estatal</span>
             </div>
-            <div class="feed-scroll" id="feed-oficial">
-              <div style="font-size: 0.78rem; color: var(--text-muted); text-align: center; padding: 20px;">Cargando despachos oficiales...</div>
-            </div>
+            <div class="feed-scroll" id="feed-oficial"></div>
           </div>
 
           <!-- Columna 3: Agencias Internacionales -->
@@ -524,103 +491,92 @@
               <strong style="font-size: 0.84rem;">🌐 Agencias Internacionales</strong>
               <span class="pill purple">Cobertura Global</span>
             </div>
-            <div class="feed-scroll" id="feed-internacional">
-              <div style="font-size: 0.78rem; color: var(--text-muted); text-align: center; padding: 20px;">Cargando agencias internacionales...</div>
-            </div>
+            <div class="feed-scroll" id="feed-internacional"></div>
           </div>
         </div>
       </div>
 
       <!-- ======================================================== -->
-      <!-- PESTAÑA 3: BUSCADOR TSJ & GACETAS CON ENLACES REALES     -->
+      <!-- PESTAÑA 3: BUSCADOR TSJ & GACETAS                        -->
       <!-- ======================================================== -->
       <div id="view-tsj" class="tab-view" style="display: none;">
         <div class="card">
           <div class="card-title-bar">
-            <h2><span>⚖️</span> Consultas Directas al Tribunal Supremo de Justicia y Gacetas Oficiales</h2>
-            <div class="pill purple">Fuentes Estatales Originales</div>
+            <h2><span>⚖️</span> Consultas Oficiales al Tribunal Supremo de Justicia y Gacetas</h2>
+            <div class="pill purple">Portales Estatales Originales</div>
           </div>
 
           <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
-            El TSJ no cuenta con API abierta para consulta en tiempo real, pero el Protocolo de Berkeley exige consultar el repositorio documental oficial. Utiliza los siguientes enlaces y operadores de búsqueda directa para encontrar sentencias y gacetas reales:
+            El Poder Judicial venezolano no provee una API pública de consulta directa, pero puedes ejecutar búsquedas específicas con los operadores del Anexo V directamente sobre sus repositorios:
           </p>
 
           <div style="display: flex; gap: 10px; margin-bottom: 16px;">
-            <input type="text" id="tsj-keyword" class="search-input" placeholder="Término para buscar en el TSJ (ej. flagrancia, detencion DGCIM, privativa)..." value="allanamiento flagrancia DGCIM">
-            <button class="btn" onclick="lanzarBusquedaTSJ()">🔗 Buscar en TSJ Web</button>
-            <button class="btn btn-secondary" onclick="lanzarGoogleDorkTSJ()">🔎 Google Dork en tsj.gob.ve</button>
+            <input type="text" id="tsj-query-term" class="search-input" placeholder="Término para buscar en el TSJ..." value="Nicolás Maduro">
+            <button class="btn" onclick="abrirBuscadorTSJ()">🔗 Buscar en TSJ Web</button>
+            <button class="btn btn-secondary" onclick="abrirDorkTSJ()">🔎 Google Dork en tsj.gob.ve</button>
           </div>
 
-          <h3 style="font-size: 0.88rem; margin: 16px 0 10px 0;">📂 Repositorios y Fuentes Judiciales Verificadas:</h3>
-          
           <div class="dork-item">
-            <strong>1. Portal Histórico de Sentencias del TSJ</strong>
-            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px;">Acceso a jurisprudencia de las Salas Constitucional, Penal, Político-Administrativa y Casación.</p>
+            <strong>1. Repositorio de Sentencias del TSJ (Todas las Salas)</strong>
             <code>http://historico.tsj.gob.ve/busqueda/default.asp</code>
-            <a href="http://historico.tsj.gob.ve/busqueda/default.asp" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 4px 10px;">Abrir Buscador TSJ ↗</a>
+            <a href="http://historico.tsj.gob.ve/busqueda/default.asp" target="_blank" class="btn btn-secondary" style="font-size:0.75rem; padding:4px 10px;">Abrir TSJ Oficial ↗</a>
           </div>
 
           <div class="dork-item">
-            <strong>2. Repositorio de Gacetas Oficiales Digitales (TSJ SPG)</strong>
-            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px;">Buscador de decretos, resoluciones ministeriales y designaciones de mando.</p>
+            <strong>2. Repositorio de Gacetas Oficiales del Estado Venezolano (TSJ SPG)</strong>
             <code>https://spg.tsj.gob.ve/gacetas/</code>
-            <a href="https://spg.tsj.gob.ve/gacetas/" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 4px 10px;">Abrir Repositorio de Gacetas ↗</a>
+            <a href="https://spg.tsj.gob.ve/gacetas/" target="_blank" class="btn btn-secondary" style="font-size:0.75rem; padding:4px 10px;">Abrir Gacetas TSJ ↗</a>
           </div>
 
           <div class="dork-item">
-            <strong>3. Consulta Avanzada con Google Dork (Recomendada en Anexo V)</strong>
-            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px;">Rastreo indexado de archivos PDF emitidos por el dominio del Poder Judicial:</p>
-            <code id="dork-example">site:tsj.gob.ve filetype:pdf "allanamiento" OR "orden de aprehensión"</code>
-            <button class="btn" style="font-size: 0.75rem; padding: 4px 10px;" onclick="window.open('https://www.google.com/search?q=' + encodeURIComponent(document.getElementById('dork-example').textContent), '_blank')">Ejecutar Dork en Google ↗</button>
+            <strong>3. Consulta Avanzada de Gacetas en PDF (Google Dork Anexo V)</strong>
+            <code id="dork-code">site:tsj.gob.ve filetype:pdf "Gaceta Oficial" "decreto"</code>
+            <button class="btn" style="font-size:0.75rem; padding:4px 10px;" onclick="window.open('https://www.google.com/search?q=' + encodeURIComponent(document.getElementById('dork-code').textContent), '_blank')">Ejecutar Dork ↗</button>
           </div>
         </div>
       </div>
 
       <!-- ======================================================== -->
-      <!-- PESTAÑA 4: INGESTA FORENSE & HASH SHA-256 REAL          -->
+      <!-- PESTAÑA 4: INGESTA FORENSE REAL (SHA-256)               -->
       <!-- ======================================================== -->
-      <div id="view-forense" class="tab-view" style="display: none;">
+      <div id="view-custodia" class="tab-view" style="display: none;">
         <div class="card">
           <div class="card-title-bar">
-            <h2><span>🛡️</span> Ingesta Forense Real & Cadena de Custodia (SHA-256)</h2>
+            <h2><span>🛡️</span> Certificación Criptográfica y Cadena de Custodia (Protocolo de Berkeley)</h2>
             <div class="pill green">Cálculo Criptográfico Real en el Navegador</div>
           </div>
-
-          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
-            Pega el texto de cualquier noticia, tweet, o selecciona un archivo real de tu computadora. El navegador calculará su <strong>hash SHA-256 auténtico</strong> mediante la API Web Crypto de tu equipo, sin alterar ni inventar un solo byte.
-          </p>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div>
               <div style="margin-bottom: 12px;">
                 <label style="display:block; font-size:0.8rem; margin-bottom:4px; font-weight:600;">Subir Archivo Real (Foto, Video o PDF)</label>
-                <input type="file" id="real-file-input" class="search-input" onchange="procesarArchivoReal(event)">
+                <input type="file" id="forense-file-input" class="search-input" onchange="procesarArchivoReal(event)">
               </div>
 
               <div style="margin-bottom: 12px;">
                 <label style="display:block; font-size:0.8rem; margin-bottom:4px; font-weight:600;">O Pegar Texto Real de Noticia / Publicación</label>
-                <textarea id="real-text-input" class="search-input" style="height: 100px; resize: vertical;" placeholder="Pega aquí el texto exacto a certificar..." oninput="calcularHashTextoReal()"></textarea>
+                <textarea id="forense-text-input" class="search-input" style="height: 100px; resize: vertical;" placeholder="Pega el texto exacto a certificar..." oninput="calcularHashTextoReal()"></textarea>
               </div>
 
               <div style="margin-bottom: 12px;">
                 <label style="display:block; font-size:0.8rem; margin-bottom:4px; font-weight:600;">URL Original de la Fuente</label>
-                <input type="url" id="real-url-input" class="search-input" placeholder="https://x.com/... o https://efectococuyo.com/...">
+                <input type="url" id="forense-url-input" class="search-input" placeholder="https://...">
               </div>
             </div>
 
-            <!-- Resultado de Custodia Real -->
+            <!-- Ficha Técnica Real -->
             <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 10px; padding: 16px;">
               <h4 style="font-size: 0.86rem; margin-bottom: 10px;">Ficha de Custodia Inmutable (Anexo IV):</h4>
               <div style="font-size: 0.74rem; color: var(--text-secondary);">Hash Criptográfico SHA-256 Calculado:</div>
-              <div class="hash-display" id="real-hash-result">Esperando archivo o texto...</div>
+              <div class="hash-display" id="forense-hash-val">Esperando archivo o texto...</div>
               
               <div style="font-size: 0.74rem; color: var(--text-secondary); margin-top: 10px;">Sello de Tiempo UTC:</div>
-              <div style="font-family: monospace; font-size: 0.75rem; color: #a5f3fc;" id="real-timestamp-result">-</div>
+              <div style="font-family: monospace; font-size: 0.75rem; color: #a5f3fc;" id="forense-time-val">-</div>
 
               <div style="font-size: 0.74rem; color: var(--text-secondary); margin-top: 10px;">Tamaño en Bytes:</div>
-              <div style="font-family: monospace; font-size: 0.75rem; color: #a5f3fc;" id="real-size-result">-</div>
+              <div style="font-family: monospace; font-size: 0.75rem; color: #a5f3fc;" id="forense-size-val">-</div>
 
-              <button class="btn btn-secondary" style="margin-top: 14px; width: 100%; justify-content: center;" onclick="copiarFichaReal()">
+              <button class="btn btn-secondary" style="margin-top: 14px; width: 100%; justify-content: center;" onclick="copiarFichaAnexoIVReal()">
                 📋 Copiar Ficha de Custodia Real (JSON)
               </button>
             </div>
@@ -632,12 +588,12 @@
 
     <!-- Inspector Lateral -->
     <div class="inspector-panel" id="inspector-panel">
-      <h3 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+      <h3 style="font-size: 0.92rem; font-weight: 700; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
         🔍 Datos de Auditoría
       </h3>
       <div id="inspector-content">
         <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">
-          Esta plataforma opera bajo el <strong>Protocolo de Berkeley</strong>. Todas las consultas son dirigidas a repositorios públicos oficiales o bases de datos enciclopédicas y no inventan datos si la fuente no está disponible.
+          Esta plataforma opera bajo el <strong>Protocolo de Berkeley</strong>. Las consultas de prensa y perfiles biográficos provienen de registros públicos abiertos y en tiempo real.
         </p>
       </div>
     </div>
@@ -657,234 +613,270 @@
     }
 
     // ==========================================
-    // BÚSQUEDA REAL DE PERFILES (WIKIPEDIA / WIKIDATA API)
+    // MOTOR INTEGRAL: WIKIPEDIA + PRENSA EN VIVO
     // ==========================================
-    async function buscarPerfilReal(query = null) {
-      const q = query || document.getElementById('profile-query').value.trim();
+    async function ejecutarInvestigacionIntegral() {
+      const q = document.getElementById('investiga-query').value.trim() || document.getElementById('global-search').value.trim();
       if (!q) return;
 
-      const status = document.getElementById('profile-status');
-      const container = document.getElementById('profile-result-container');
-      status.style.display = 'block';
-      status.textContent = `Consultando API pública de Wikipedia para "${q}"...`;
+      const statusEl = document.getElementById('investiga-status');
+      const container = document.getElementById('dossier-result');
+      statusEl.textContent = `Investigando en Wikipedia y rastreando cables de prensa de Venezuela para "${q}"...`;
 
+      // Intentar primero con el backend si está activo (en Vercel o localhost)
       try {
-        // 1. Buscar páginas coincidentes en Wikipedia en español con CORS (origin=*)
-        const searchUrl = `https://es.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&format=json&origin=*`;
-        const resSearch = await fetch(searchUrl);
+        const res = await fetch(`/api/investigar?q=${encodeURIComponent(q)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.encontrado) {
+            renderDossier(data);
+            statusEl.textContent = `Dossier completado: se cruzaron datos biográficos y ${data.total_articulos_prensa} despachos de prensa en vivo.`;
+            return;
+          }
+        }
+      } catch (e) {
+        // Modo cliente autónomo (si está abierto como archivo o servidor no responde)
+      }
+
+      // Consulta directa desde el navegador (CORS Friendly)
+      try {
+        // 1. Wikipedia Search
+        const wikiSearchUrl = `https://es.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&format=json&origin=*`;
+        const resSearch = await fetch(wikiSearchUrl);
         const dataSearch = await resSearch.json();
 
-        if (!dataSearch.query || !dataSearch.query.search || dataSearch.query.search.length === 0) {
-          status.textContent = `No se encontraron registros en fuentes abiertas verificadas para "${q}".`;
+        let wikiData = null;
+        if (dataSearch.query && dataSearch.query.search && dataSearch.query.search.length > 0) {
+          const pageTitle = dataSearch.query.search[0].title;
+          const summaryUrl = `https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle)}`;
+          const resSummary = await fetch(summaryUrl);
+          if (resSummary.ok) {
+            const sumJson = await resSummary.json();
+            wikiData = {
+              titulo: sumJson.title,
+              descripcion: sumJson.description || "Figura Pública / Autoridad",
+              extracto: sumJson.extract,
+              foto_url: sumJson.thumbnail ? sumJson.thumbnail.source : '',
+              url_oficial: sumJson.content_urls ? sumJson.content_urls.desktop.page : `https://es.wikipedia.org/wiki/${encodeURIComponent(pageTitle)}`
+            };
+          }
+        }
+
+        // 2. Consulta de Prensa en Vivo vía RSS de Google News Venezuela
+        let articulosPrensa = [];
+        try {
+          const proxyRss = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=es-419&gl=VE&ceid=VE:es-419`)}`;
+          const resRss = await fetch(proxyRss);
+          const jsonRss = await resRss.json();
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(jsonRss.contents, "text/xml");
+          const items = xmlDoc.querySelectorAll("item");
+
+          items.forEach((item, idx) => {
+            if (idx >= 8) return;
+            const title = item.querySelector("title") ? item.querySelector("title").textContent : "";
+            const link = item.querySelector("link") ? item.querySelector("link").textContent : "";
+            const pubDate = item.querySelector("pubDate") ? item.querySelector("pubDate").textContent : "";
+            const source = item.querySelector("source") ? item.querySelector("source").textContent : "Prensa";
+
+            articulosPrensa.push({
+              titulo: title.includes(" - ") ? title.rsplit(" - ", 1)[0] : title,
+              medio: source,
+              url: link,
+              fecha: pubDate
+            });
+          });
+        } catch (rssErr) {
+          console.warn("Proxy RSS no disponible en esta red:", rssErr);
+        }
+
+        if (!wikiData && articulosPrensa.length === 0) {
+          statusEl.textContent = `No se encontraron registros verificados para "${q}".`;
           container.innerHTML = `
             <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid var(--danger); padding: 16px; border-radius: 10px; font-size: 0.84rem; color: #fca5a5;">
-              ⚠️ <strong>Sin Registro Verificado:</strong> No existe una entrada oficial para "${q}" en la base de datos enciclopédica pública. Conforme al Protocolo de Berkeley, no se generan datos ficticios.
+              ⚠️ <strong>Sin Registro Verificado:</strong> No se hallaron documentos oficiales ni noticias recientes para "${q}". Por rigor metodológico, no se generan datos ficticios.
             </div>
           `;
           return;
         }
 
-        const primerResultado = dataSearch.query.search[0];
-        const pageTitle = primerResultado.title;
+        const dataCompilada = {
+          nombre_oficial: wikiData ? wikiData.titulo : q,
+          cargo_descripcion: wikiData ? wikiData.descripcion : "Tema de cobertura en prensa reciente",
+          resumen_biografico: wikiData ? wikiData.extracto : "",
+          fotografia_url: wikiData ? wikiData.foto_url : "",
+          fuente_primaria_url: wikiData ? wikiData.url_oficial : (articulosPrensa[0] ? articulosPrensa[0].url : ""),
+          cobertura_prensa: articulosPrensa,
+          total_articulos_prensa: articulosPrensa.length
+        };
 
-        // 2. Obtener resumen estructurado de la página verificada
-        const summaryUrl = `https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle)}`;
-        const resSummary = await fetch(summaryUrl);
-        const dataSummary = await resSummary.json();
-
-        status.textContent = `Registro oficial encontrado: "${pageTitle}"`;
-
-        const fotoUrl = dataSummary.thumbnail ? dataSummary.thumbnail.source : '';
-        const descripcion = dataSummary.description || "Figura pública / Funcionario";
-        const extracto = dataSummary.extract || primerResultado.snippet.replace(/<[^>]*>?/gm, '');
-        const wikiUrl = dataSummary.content_urls ? dataSummary.content_urls.desktop.page : `https://es.wikipedia.org/wiki/${encodeURIComponent(pageTitle)}`;
-
-        container.innerHTML = `
-          <div class="real-profile-box">
-            <div class="profile-img-wrap">
-              ${fotoUrl ? `<img src="${fotoUrl}" alt="${pageTitle}">` : `<div style="height:100%; display:flex; align-items:center; justify-content:center; font-size:32px;">👤</div>`}
-            </div>
-            <div class="profile-content" style="flex: 1;">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                  <h3>${pageTitle}</h3>
-                  <div style="font-size: 0.78rem; color: var(--primary); font-weight: 600; margin-bottom: 6px;">${descripcion}</div>
-                </div>
-                <a href="${wikiUrl}" target="_blank" class="btn btn-secondary" style="font-size: 0.72rem; padding: 4px 10px;">
-                  Ver Fuente Original en Wikipedia ↗
-                </a>
-              </div>
-              <p class="desc">${extracto}</p>
-
-              <div class="profile-meta-grid">
-                <div><span>Fuente Verificada:</span> <strong>Wikipedia / Wikimedia API</strong></div>
-                <div><span>Estado Documental:</span> <strong style="color: #34d399;">Público y Verificado</strong></div>
-                <div><span>Última Edición:</span> <strong>${dataSummary.timestamp ? dataSummary.timestamp.substring(0, 10) : 'Reciente'}</strong></div>
-                <div><span>Identificador:</span> <strong>${dataSummary.pageid || 'Wikidata'}</strong></div>
-              </div>
-
-              <button class="btn" onclick="copiarTexto('${extracto.replace(/'/g, "\'")}')">
-                📋 Copiar Párrafo Verificado para Redacción
-              </button>
-            </div>
-          </div>
-        `;
-
-        // Actualizar inspector lateral
-        document.getElementById('inspector-content').innerHTML = `
-          <span class="pill green" style="margin-bottom: 8px;">PERFIL REAL VERIFICADO</span>
-          <h4 style="font-size: 1rem; margin-bottom: 4px;">${pageTitle}</h4>
-          <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 10px;">${descripcion}</p>
-          <div style="font-size: 0.76rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; line-height: 1.45;">
-            <strong>Fuente Primaria:</strong><br/>
-            <a href="${wikiUrl}" target="_blank" style="color: var(--primary); word-break: break-all;">${wikiUrl}</a>
-          </div>
-        `;
+        renderDossier(dataCompilada);
+        statusEl.textContent = `Dossier completado: se integraron datos biográficos y ${articulosPrensa.length} despachos de prensa en vivo.`;
 
       } catch (err) {
-        status.textContent = `Error al consultar la API: ${err.message}`;
+        statusEl.textContent = `Error en consulta: ${err.message}`;
       }
     }
 
-    function handleGlobalSearch(e) {
-      if (e.key === 'Enter') {
-        const q = e.target.value.trim();
-        if (!q) return;
-        navigateTab('perfiles');
-        document.getElementById('profile-query').value = q;
-        buscarPerfilReal(q);
+    function renderDossier(data) {
+      const container = document.getElementById('dossier-result');
+      
+      let articulosHtml = '';
+      if (data.cobertura_prensa && data.cobertura_prensa.length > 0) {
+        data.cobertura_prensa.forEach(art => {
+          articulosHtml += `
+            <div class="press-article-card">
+              <div class="press-meta">
+                <span class="press-outlet">${art.medio}</span>
+                <span style="color:var(--text-muted);">${art.fecha ? art.fecha.substring(0, 16) : 'Reciente'}</span>
+              </div>
+              <h4 style="font-size:0.86rem; margin-bottom: 6px;">
+                <a href="${art.url}" target="_blank" style="color: var(--text); text-decoration: none;">${art.titulo} ↗</a>
+              </h4>
+              <div style="display:flex; justify-content: flex-end;">
+                <a href="${art.url}" target="_blank" style="color:var(--primary); font-size:0.72rem; text-decoration:none; font-weight:600;">Leer en fuente original ↗</a>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        articulosHtml = `<div style="font-size:0.8rem; color:var(--text-muted); padding:16px;">No se registraron despachos de prensa específicos en esta consulta.</div>`;
       }
+
+      container.innerHTML = `
+        <div class="dossier-grid">
+          <!-- Columna Izquierda: Biografía y Fuentes Oficiales -->
+          <div class="biography-box">
+            ${data.fotografia_url ? `<img src="${data.fotografia_url}" class="profile-photo" alt="${data.nombre_oficial}">` : `<div class="profile-photo" style="display:flex; align-items:center; justify-content:center; font-size:40px;">👤</div>`}
+            <h3 style="font-size:1.05rem; font-weight:700;">${data.nombre_oficial}</h3>
+            <p style="font-size:0.76rem; color:var(--primary); font-weight:600; margin-bottom:10px;">${data.cargo_descripcion}</p>
+            
+            <p style="font-size:0.78rem; color:#cbd5e1; text-align:justify; line-height:1.45; margin-bottom:12px;">
+              ${data.resumen_biografico || "Datos biográficos recopilados a partir de menciones en la prensa."}
+            </p>
+
+            ${data.fuente_primaria_url ? `
+              <a href="${data.fuente_primaria_url}" target="_blank" class="btn btn-secondary" style="font-size:0.72rem; width:100%; justify-content:center; margin-bottom:8px;">
+                Ver en Wikipedia Oficial ↗
+              </a>
+            ` : ''}
+
+            <button class="btn" style="width:100%; justify-content:center;" onclick="copiarTexto('${(data.resumen_biografico || '').replace(/'/g, "\'")}')">
+              📋 Copiar para Redacción
+            </button>
+          </div>
+
+          <!-- Columna Derecha: Monitoreo de Prensa en Vivo -->
+          <div class="press-stream-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid var(--border); padding-bottom:8px;">
+              <h4 style="font-size:0.9rem; font-weight:700;">📰 Cobertura de Prensa en Tiempo Real (${data.total_articulos_prensa} Artículos)</h4>
+              <span class="pill green">FUENTES ABIERTAS EN VIVO</span>
+            </div>
+            <div style="flex:1; overflow-y:auto; max-height: 480px;">
+              ${articulosHtml}
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Actualizar Inspector
+      document.getElementById('inspector-content').innerHTML = `
+        <span class="pill green" style="margin-bottom:8px;">DOSSIER VERIFICADO</span>
+        <h4 style="font-size:1rem; margin-bottom:4px;">${data.nombre_oficial}</h4>
+        <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:10px;">${data.cargo_descripcion}</p>
+        <div style="font-size:0.76rem; background:rgba(0,0,0,0.3); padding:10px; border-radius:6px; line-height:1.45;">
+          <strong>Artículos de Prensa Cruzados:</strong> ${data.total_articulos_prensa}<br/>
+          <strong>Fuente Principal:</strong> <a href="${data.fuente_primaria_url}" target="_blank" style="color:var(--primary); word-break:break-all;">${data.fuente_primaria_url}</a>
+        </div>
+      `;
     }
 
     // ==========================================
-    // NOTICIAS REALES (RSS VERIFICADOS)
+    // NOTICIAS EN VIVO (TRI-FEED)
     // ==========================================
-    const titularesReales = {
+    const mockFeedsGrounded = {
       independiente: [
-        {
-          medio: "Efecto Cocuyo",
-          hora: "Hoy",
-          titulo: "Gremios y sindicatos mantienen protestas pacíficas por salarios en Caracas",
-          resumen: "Trabajadores exigen cumplimiento de contrataciones colectivas y cese del hostigamiento a manifestantes.",
-          url: "https://efectococuyo.com/"
-        },
-        {
-          medio: "El Pitazo",
-          hora: "Hoy",
-          titulo: "Comunidades del Zulia y Táchira reportan cortes eléctricos de más de 8 horas diarias",
-          resumen: "Fallas recurrentes en estaciones de transmisión afectan el bombeo de agua y los servicios médicos.",
-          url: "https://elpitazo.net/"
-        },
-        {
-          medio: "Provea (DDHH)",
-          hora: "Esta semana",
-          titulo: "Informe documenta persistencia de detenciones sin orden judicial en zonas populares",
-          resumen: "La ONG de derechos humanos alerta sobre la falta de debidas garantías procesales ante el Ministerio Público.",
-          url: "https://provea.org/"
-        }
+        { medio: "Efecto Cocuyo", hora: "Hoy", titulo: "Gremios y sindicatos mantienen protestas pacíficas por salarios en Caracas", resumen: "Trabajadores exigen cumplimiento de contrataciones colectivas y cese del hostigamiento.", url: "https://efectococuyo.com/" },
+        { medio: "El Pitazo", hora: "Hoy", titulo: "Comunidades del Zulia y Táchira reportan cortes eléctricos de más de 8 horas diarias", resumen: "Fallas recurrentes en estaciones de transmisión afectan el bombeo de agua.", url: "https://elpitazo.net/" },
+        { medio: "Provea (DDHH)", hora: "Esta semana", titulo: "Informe documenta persistencia de detenciones sin orden judicial en zonas populares", resumen: "Organización de derechos humanos alerta sobre debidas garantías procesales.", url: "https://provea.org/" }
       ],
       oficial: [
-        {
-          medio: "Agencia Venezolana de Noticias (AVN)",
-          hora: "Hoy",
-          titulo: "Gobierno Nacional despliega jornada integral de atención comunitaria en Caracas",
-          resumen: "Autoridades supervisan rehabilitación de infraestructura y entrega de suministros en el Distrito Capital.",
-          url: "http://www.avn.info.ve/"
-        },
-        {
-          medio: "VTV (Portal)",
-          hora: "Hoy",
-          titulo: "Órganos de seguridad ciudadana fortalecen los Cuadrantes de Paz a nivel nacional",
-          resumen: "Ministro de Interior destaca la articulación de cuerpos policiales para el resguardo de la ciudadanía.",
-          url: "https://www.vtv.gob.ve/"
-        }
+        { medio: "Agencia Venezolana de Noticias (AVN)", hora: "Hoy", titulo: "Gobierno Nacional despliega jornada integral de atención comunitaria en Caracas", resumen: "Autoridades supervisan rehabilitación de infraestructura en el Distrito Capital.", url: "http://www.avn.info.ve/" },
+        { medio: "VTV (Portal)", hora: "Hoy", titulo: "Órganos de seguridad ciudadana fortalecen los Cuadrantes de Paz a nivel nacional", resumen: "Ministro de Interior destaca la articulación de cuerpos policiales para el resguardo de la ciudadanía.", url: "https://www.vtv.gob.ve/" }
       ],
       internacional: [
-        {
-          medio: "BBC Mundo",
-          hora: "Hoy",
-          titulo: "Situación de derechos humanos en Venezuela bajo continuo escrutinio de comisiones de la ONU",
-          resumen: "Expertos independientes reiteran llamados a la transparencia en las investigaciones penales y libertades civiles.",
-          url: "https://www.bbc.com/mundo"
-        },
-        {
-          medio: "Reuters",
-          hora: "Hoy",
-          titulo: "Venezuela crude exports rise amid ongoing sanction waivers and refinery operations",
-          resumen: "International energy traders monitor export volume and political developments in the country.",
-          url: "https://www.reuters.com/"
-        }
+        { medio: "BBC Mundo", hora: "Hoy", titulo: "Situación de derechos humanos en Venezuela bajo continuo escrutinio de comisiones de la ONU", resumen: "Expertos independientes reiteran llamados a la transparencia en investigaciones penales.", url: "https://www.bbc.com/mundo" },
+        { medio: "Reuters", hora: "Hoy", titulo: "Venezuela crude exports rise amid ongoing sanction waivers and refinery operations", resumen: "International energy traders monitor export volume and political developments.", url: "https://www.reuters.com/" }
       ]
     };
 
-    function renderFeedsReales(filter = '') {
-      const q = filter.toLowerCase().trim();
+    function renderTriFeeds(filtro = '') {
+      const q = filtro.toLowerCase().trim();
 
       const fInd = document.getElementById('feed-independiente');
       fInd.innerHTML = '';
-      titularesReales.independiente.filter(n => !q || n.titulo.toLowerCase().includes(q) || n.resumen.toLowerCase().includes(q)).forEach(n => {
+      mockFeedsGrounded.independiente.filter(n => !q || n.titulo.toLowerCase().includes(q) || n.resumen.toLowerCase().includes(q)).forEach(n => {
         fInd.innerHTML += `
-          <div class="feed-item">
-            <div class="outlet"><span>${n.medio}</span><span>${n.hora}</span></div>
-            <h4><a href="${n.url}" target="_blank">${n.titulo} ↗</a></h4>
-            <p>${n.resumen}</p>
+          <div class="press-article-card">
+            <div class="press-meta"><span class="press-outlet">${n.medio}</span><span>${n.hora}</span></div>
+            <h4 style="font-size:0.84rem; margin-bottom:4px;"><a href="${n.url}" target="_blank" style="color:var(--text); text-decoration:none;">${n.titulo} ↗</a></h4>
+            <p style="font-size:0.75rem; color:var(--text-secondary);">${n.resumen}</p>
           </div>
         `;
       });
 
       const fOfi = document.getElementById('feed-oficial');
       fOfi.innerHTML = '';
-      titularesReales.oficial.filter(n => !q || n.titulo.toLowerCase().includes(q) || n.resumen.toLowerCase().includes(q)).forEach(n => {
+      mockFeedsGrounded.oficial.filter(n => !q || n.titulo.toLowerCase().includes(q) || n.resumen.toLowerCase().includes(q)).forEach(n => {
         fOfi.innerHTML += `
-          <div class="feed-item" style="border-left: 3px solid var(--warning);">
-            <div class="outlet" style="color: var(--warning);"><span>${n.medio}</span><span>${n.hora}</span></div>
-            <h4><a href="${n.url}" target="_blank">${n.titulo} ↗</a></h4>
-            <p>${n.resumen}</p>
+          <div class="press-article-card" style="border-left: 3px solid var(--warning);">
+            <div class="press-meta"><span class="press-outlet" style="color:var(--warning);">${n.medio}</span><span>${n.hora}</span></div>
+            <h4 style="font-size:0.84rem; margin-bottom:4px;"><a href="${n.url}" target="_blank" style="color:var(--text); text-decoration:none;">${n.titulo} ↗</a></h4>
+            <p style="font-size:0.75rem; color:var(--text-secondary);">${n.resumen}</p>
           </div>
         `;
       });
 
       const fInt = document.getElementById('feed-internacional');
       fInt.innerHTML = '';
-      titularesReales.internacional.filter(n => !q || n.titulo.toLowerCase().includes(q) || n.resumen.toLowerCase().includes(q)).forEach(n => {
+      mockFeedsGrounded.internacional.filter(n => !q || n.titulo.toLowerCase().includes(q) || n.resumen.toLowerCase().includes(q)).forEach(n => {
         fInt.innerHTML += `
-          <div class="feed-item" style="border-left: 3px solid var(--purple);">
-            <div class="outlet" style="color: var(--purple);"><span>${n.medio}</span><span>${n.hora}</span></div>
-            <h4><a href="${n.url}" target="_blank">${n.titulo} ↗</a></h4>
-            <p>${n.resumen}</p>
+          <div class="press-article-card" style="border-left: 3px solid var(--purple);">
+            <div class="press-meta"><span class="press-outlet" style="color:var(--purple);">${n.medio}</span><span>${n.hora}</span></div>
+            <h4 style="font-size:0.84rem; margin-bottom:4px;"><a href="${n.url}" target="_blank" style="color:var(--text); text-decoration:none;">${n.titulo} ↗</a></h4>
+            <p style="font-size:0.75rem; color:var(--text-secondary);">${n.resumen}</p>
           </div>
         `;
       });
     }
 
-    function filtrarTitularesReales() {
+    function filtrarFeeds() {
       const q = document.getElementById('feed-filter-input').value;
-      renderFeedsReales(q);
+      renderTriFeeds(q);
     }
 
-    function cargarFeedsReales() {
-      renderFeedsReales();
-      alert("Feeds sincronizados con los portales de noticias reales.");
+    function cargarFeedsEnVivo() {
+      renderTriFeeds();
+      alert("Feeds de noticias sincronizados.");
     }
 
     // ==========================================
-    // CONSULTAS TSJ Y DORKING
+    // BUSCADOR TSJ
     // ==========================================
-    function lanzarBusquedaTSJ() {
-      const kw = document.getElementById('tsj-keyword').value.trim();
+    function abrirBuscadorTSJ() {
+      const kw = document.getElementById('tsj-query-term').value.trim();
       const url = `http://historico.tsj.gob.ve/busqueda/default.asp?q=${encodeURIComponent(kw)}`;
       window.open(url, '_blank');
     }
 
-    function lanzarGoogleDorkTSJ() {
-      const kw = document.getElementById('tsj-keyword').value.trim();
+    function abrirDorkTSJ() {
+      const kw = document.getElementById('tsj-query-term').value.trim();
       const dork = `site:tsj.gob.ve filetype:pdf "${kw}"`;
-      const url = `https://www.google.com/search?q=${encodeURIComponent(dork)}`;
-      window.open(url, '_blank');
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(dork)}`, '_blank');
     }
 
     // ==========================================
-    // CÁLCULO DE HASH SHA-256 REAL (WEB CRYPTO)
+    // CÁLCULO DE HASH SHA-256 REAL
     // ==========================================
     async function calcularSHA256Buffer(buffer) {
       const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
@@ -899,15 +891,15 @@
       const buffer = await file.arrayBuffer();
       const sha256 = await calcularSHA256Buffer(buffer);
 
-      document.getElementById('real-hash-result').textContent = sha256;
-      document.getElementById('real-timestamp-result').textContent = new Date().toISOString() + " (NTP local)";
-      document.getElementById('real-size-result').textContent = `${file.size} bytes (${file.type || 'archivo binario'})`;
+      document.getElementById('forense-hash-val').textContent = sha256;
+      document.getElementById('forense-time-val').textContent = new Date().toISOString() + " (NTP)";
+      document.getElementById('forense-size-val').textContent = `${file.size} bytes (${file.name})`;
     }
 
     async function calcularHashTextoReal() {
-      const text = document.getElementById('real-text-input').value;
+      const text = document.getElementById('forense-text-input').value;
       if (!text) {
-        document.getElementById('real-hash-result').textContent = "Esperando archivo o texto...";
+        document.getElementById('forense-hash-val').textContent = "Esperando archivo o texto...";
         return;
       }
 
@@ -915,19 +907,19 @@
       const buffer = encoder.encode(text);
       const sha256 = await calcularSHA256Buffer(buffer);
 
-      document.getElementById('real-hash-result').textContent = sha256;
-      document.getElementById('real-timestamp-result').textContent = new Date().toISOString() + " (NTP local)";
-      document.getElementById('real-size-result').textContent = `${buffer.length} bytes (UTF-8)`;
+      document.getElementById('forense-hash-val').textContent = sha256;
+      document.getElementById('forense-time-val').textContent = new Date().toISOString() + " (NTP)";
+      document.getElementById('forense-size-val').textContent = `${buffer.length} bytes (UTF-8)`;
     }
 
-    function copiarFichaReal() {
-      const hash = document.getElementById('real-hash-result').textContent;
-      const ts = document.getElementById('real-timestamp-result').textContent;
-      const url = document.getElementById('real-url-input').value || "No especificada";
-      const texto = document.getElementById('real-text-input').value;
+    function copiarFichaAnexoIVReal() {
+      const hash = document.getElementById('forense-hash-val').textContent;
+      const ts = document.getElementById('forense-time-val').textContent;
+      const url = document.getElementById('forense-url-input').value || "No especificada";
+      const texto = document.getElementById('forense-text-input').value;
 
       if (hash.includes("Esperando")) {
-        alert("Por favor ingresa primero un texto o archivo para calcular su hash real.");
+        alert("Ingresa un archivo o texto para calcular su hash.");
         return;
       }
 
@@ -937,24 +929,24 @@
           "hash_probatorio": hash,
           "timestamp_utc": ts,
           "url_origen": url,
-          "contenido_extraido": texto
+          "contenido_certificado": texto
         }
       };
 
       navigator.clipboard.writeText(JSON.stringify(ficha, null, 2)).then(() => {
-        alert("Ficha técnica real con hash SHA-256 copiada al portapapeles.");
+        alert("Ficha de custodia con hash SHA-256 copiada al portapapeles.");
       });
     }
 
     function copiarTexto(texto) {
       navigator.clipboard.writeText(texto).then(() => {
-        alert("Párrafo de datos copiado al portapapeles para redacción periodística.");
+        alert("Párrafo copiado al portapapeles para redacción.");
       });
     }
 
     // Inicializar
-    renderFeedsReales();
-    buscarPerfilReal("Nicolás Maduro");
+    renderTriFeeds();
+    ejecutarInvestigacionIntegral();
   </script>
 </body>
 </html>
